@@ -5,6 +5,7 @@ dotenv.config();
 import app from "./app";
 
 const PORT = process.env.PORT;
+console.log(dotenv)
 
 const serviceAccount = {
   type: process.env.type,
