@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
 import admin from "firebase-admin";
+import fs from "fs";
 dotenv.config();
 
 import app from "./app";
-import serviceAccount from "../etc/secrets/serviceAccount.json";
-
+// import serviceAccount from "./serviceAccount.json";
 const PORT = process.env.PORT;
 
 // const serviceAccount = {
@@ -22,11 +22,29 @@ const PORT = process.env.PORT;
 
 async function start() {
   try {
-    await admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
-      databaseURL:
-        "https://sunrise-hookah-default-rtdb.europe-west1.firebasedatabase.app",
-    });
+    const sourceFilePath = "/etc/secrets/serviceAccount.json";
+    // const destinationFilePath = "./src/serviceAccount.json";
+    // Копіюємо файл
+    const test = await fs.promises.readFile(sourceFilePath, "utf8");
+    const serviceAccount = JSON.parse(test);
+    // await fs.promises
+    //   .copyFile(sourceFilePath, destinationFilePath)
+    //   .then(() => {
+    //     console.log("Файл успішно скопійовано!");
+    //   })
+    //   .catch((err) => {
+    //     console.error("Помилка при копіюванні файлу:", err);
+    //   });
+
+    // console.log("asda", test);
+    serviceAccount &&
+      (await admin.initializeApp({
+        credential: admin.credential.cert(
+          serviceAccount as admin.ServiceAccount
+        ),
+        databaseURL:
+          "https://sunrise-hookah-default-rtdb.europe-west1.firebasedatabase.app",
+      }));
     await app.listen(PORT, function () {
       console.log(`Server running. Use our API on port: ${PORT}`);
     });
