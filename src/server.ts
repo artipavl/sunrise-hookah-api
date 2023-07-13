@@ -3,7 +3,7 @@ import admin from "firebase-admin";
 dotenv.config();
 
 import app from "./app";
-import serviceAccount from "./etc/secrets/serviceAccount.json";
+import serviceAccount from "../etc/secrets/serviceAccount.json";
 
 const PORT = process.env.PORT;
 
