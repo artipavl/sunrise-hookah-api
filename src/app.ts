@@ -14,8 +14,6 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-console.log(2)
 app.use("/", routerOne);
-console.log(routerOne)
 
 export default app;
