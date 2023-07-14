@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import admin from "firebase-admin";
 import bcrypt from "bcrypt";
 import { ctrlWrapper } from "../../helpers";
-import Collection from "../../server";
+// import Collection from "../../server";
 
 interface RequestBody {
   email: string;
@@ -23,7 +23,8 @@ export const register = ctrlWrapper(async (req: Request, res: Response) => {
     emailVerified: false,
     disabled: false,
   });
-  await Collection.User.doc(auth.uid).set({
+
+  await admin.firestore().collection("users").doc(auth.uid).set({
     role: "supper",
     name,
   });
