@@ -27,8 +27,6 @@ const serviceAccount = JSON.parse(
   })
 );
 
-console.log(serviceAccount);
-
 initializeApp({
   credential: cert(serviceAccount as ServiceAccount),
   databaseURL:
