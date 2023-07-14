@@ -1,30 +1,31 @@
 import { Request, Response } from "express";
+import admin from "firebase-admin";
 import bcrypt from "bcrypt";
 import { ctrlWrapper } from "../../helpers";
-
-import e from "../../server";
+import Collection from "../../server";
 
 interface RequestBody {
   email: string;
   password: string;
+  name: string;
 }
 
 export const register = ctrlWrapper(async (req: Request, res: Response) => {
-  const { email, password }: RequestBody = req.body;
+  const { email, password, name }: RequestBody = req.body;
 
   const hashedPassword = await bcrypt.hash(password, 12);
 
-  const auth = await e.admin.auth().createUser({
+  const auth = await admin.auth().createUser({
     email,
     password: hashedPassword,
-    emailVerified: false,
+    displayName: name,
 
+    emailVerified: false,
     disabled: false,
   });
-  console.log(auth);
-  await e.User.set({
+  await Collection.User.doc(auth.uid).set({
     role: "supper",
-    userid: auth.uid,
+    name,
   });
 
   res.json({ email: auth.email });

@@ -1,10 +1,14 @@
 import dotenv from "dotenv";
-import admin from "firebase-admin";
-// import fs from "fs";
 dotenv.config();
+import { initializeApp, cert } from "firebase-admin/app";
+import {
+  getFirestore,
+  // Timestamp,
+  // FieldValue,
+  // Filter,
+} from "firebase-admin/firestore";
 
 import app from "./app";
-// import serviceAccount from "./serviceAccount.json";
 const PORT = process.env.PORT;
 
 const serviceAccount = JSON.parse(
@@ -22,24 +26,14 @@ const serviceAccount = JSON.parse(
   })
 );
 
-const admindb = admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+initializeApp({
+  credential: cert(serviceAccount),
   databaseURL:
     "https://sunrise-hookah-default-rtdb.europe-west1.firebasedatabase.app",
 });
 
-const db = admin.database();
-
-const ref = db.ref("server/saving-data/fireblog");
-
-const User = ref.child("users");
-
 async function start() {
   try {
-    if (!admindb) {
-      console.log(`serviceAccount faild`);
-      return;
-    }
     await app.listen(PORT, function () {
       console.log(`Server running. Use our API on port: ${PORT}`);
     });
@@ -49,8 +43,11 @@ async function start() {
 }
 
 start();
-const e = {
-  admin: admindb,
+
+const db = getFirestore();
+const User = db.collection("users");
+
+const Collection = {
   User,
 };
-export default e;
+export default Collection;
