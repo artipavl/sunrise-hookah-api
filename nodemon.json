@@ -1,5 +1,5 @@
 {
-  "watch": ["src"],
+  "watch": ["src", "etc"],
   "ext": "ts",
   "ignore": ["node_modules", "models/contacts.json", "src/**/*.spec.ts"],
   "exec": "ts-node src/server.ts"
