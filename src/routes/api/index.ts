@@ -1,3 +1,4 @@
-import router from "../admin";
+import adminRouter from "./admin";
+import typeRouter from "./type";
 
-export { router }
+export { adminRouter, typeRouter };
