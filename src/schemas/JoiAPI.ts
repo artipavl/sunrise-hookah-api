@@ -84,13 +84,9 @@ class JoiAPI {
           "The length of 'name' must be between 2 and 35 characters",
       }),
     }),
-    cost: Joi.object({
-      ua: Joi.number().required().messages({
-        "any.required": "Missing required 'cost' field",
-      }),
-      eu: Joi.number().required().messages({
-        "any.required": "Missing required 'cost' field",
-      }),
+    // переосмислити
+    cost: Joi.number().required().messages({
+      "any.required": "Missing required 'cost' field",
     }),
 
     description: Joi.object({
@@ -128,6 +124,7 @@ class JoiAPI {
       "string.min": "The length of 'type' must be between 2 and 35 characters",
       "string.max": "The length of 'type' must be between 2 and 35 characters",
     }),
+    fotos: Joi.array().items(Joi.string()).default([]),
   });
 }
 
