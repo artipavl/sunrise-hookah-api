@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import admin from "firebase-admin";
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 
 import fs from "fs";
 dotenv.config();
@@ -35,13 +35,12 @@ async function start() {
       console.log("serviceAccount === null");
       return;
     }
-    await initializeApp(firebaseConfig)
+    await initializeApp(firebaseConfig);
     await admin.initializeApp({
-      credential: admin.credential.cert(
-        serviceAccount as admin.ServiceAccount
-      ),
+      credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
       databaseURL:
         "https://sunrise-hookah-default-rtdb.europe-west1.firebasedatabase.app",
+      storageBucket: firebaseConfig.storageBucket,
     });
 
     await app.listen(PORT, function () {
