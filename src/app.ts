@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import logger from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -16,5 +16,15 @@ app.use(express.json());
 
 app.use("/", adminRouter);
 app.use("/type", typeRouter);
+
+interface Error {
+  message: string;
+  status: number;
+}
+
+app.use((err: Error, _req: Request, res: Response) => {
+  const { message = "Internal Server Error", status = 500 } = err;
+  res.status(status).json({ message });
+});
 
 export default app;
