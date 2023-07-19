@@ -31,18 +31,18 @@ export const getTovarByType = ctrlWrapper(
 
     if (snapshot.empty) {
       res.json({ tovars, count: 0 });
-    } else {
-      snapshot.forEach((doc) => {
-        tovars.push({ ...doc.data(), id: doc.id });
-      });
-
-      const count = await docRef
-        .orderBy("type")
-        .where("type", "==", id)
-        .count()
-        .get();
-
-      res.json({ tovars, count: count.data() });
+      return;
     }
+    snapshot.forEach((doc) => {
+      tovars.push({ ...doc.data(), id: doc.id });
+    });
+
+    const count = await docRef
+      .orderBy("type")
+      .where("type", "==", id)
+      .count()
+      .get();
+
+    res.json({ tovars, count: count.data() });
   }
 );
