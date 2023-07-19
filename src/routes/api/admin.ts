@@ -1,6 +1,6 @@
 import express from "express";
 
-import { current, login, logout, registers } from "../../controllers/admin/auth";
+import { registers, login, current, logout } from "../../controllers/admin";
 import { isValidBody, Authorization } from "../../helpers";
 import { joiAPI } from "../../schemas/JoiAPI";
 
