@@ -18,13 +18,11 @@ export const updateTovarById = ctrlWrapper(
       return;
     }
 
-    const newtovat = await admin
+    await admin
       .firestore()
       .collection("tovars")
       .doc(id)
       .update({ ...tovar });
-
-    console.log(newtovat);
 
     const bucket = admin.storage().bucket();
 

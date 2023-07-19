@@ -29,12 +29,13 @@ router.post(
   isValidBody(joiAPI.addTovar),
   addTovar
 );
+
 router.put(
   "/:id",
-  Authorization,
+  // Authorization,
   upload.array("files", 5),
   convertJsonBodyTovar,
-  isValidBody(joiAPI.addTovar),
+  isValidBody(joiAPI.updateTovar),
   updateTovarById
 );
 
