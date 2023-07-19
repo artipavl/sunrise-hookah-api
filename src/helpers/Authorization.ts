@@ -6,15 +6,13 @@ import { getAuth, signInWithCustomToken } from "firebase/auth";
 const Authorization = async (req: Request, _: Response, next: NextFunction) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
-  console.log(bearer, token)
   if (bearer !== "Bearer") {
     next(new HttpError(401, "Not authorized"));
   }
   const auth = getAuth();
 
-
   try {
-    const credential = await signInWithCustomToken(auth, token)
+    const credential = await signInWithCustomToken(auth, token);
 
     const userAdmin = await admin.firestore()
       .doc(`users/${credential.user.uid}`)
@@ -22,11 +20,12 @@ const Authorization = async (req: Request, _: Response, next: NextFunction) => {
 
     const userAdminData = userAdmin.data()
 
-    if (!userAdminData) {
+    if (!userAdminData || !userAdminData?.token || userAdminData.token !== token) {
       next(new HttpError(401, "Not authorized"));
     }
 
     req.body.admin = userAdminData;
+    req.body.auth = { uid: credential.user.uid };
 
     next()
   } catch (error) {
