@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import admin from "firebase-admin";
 import { ctrlWrapper } from "../../helpers";
-// import Collection from "../../server";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -14,7 +13,6 @@ interface RequestBody {
   email: string;
   password: string;
   name: string;
-
 }
 
 export const registers = ctrlWrapper(async (req: Request, res: Response) => {
@@ -38,24 +36,36 @@ export const login = ctrlWrapper(async (req: Request, res: Response) => {
   const adminAuth = getAdminAuth();
 
   const credential = await signInWithEmailAndPassword(auth, email, password);
-
-  const userAdmin = await admin.firestore()
-    .doc(`users/${credential.user.uid}`)
-    .get();
-
-  const userAdminData = userAdmin.data()
+  const userAdminPath = admin.firestore().collection('users').doc(credential.user.uid);
+  const userAdminData = (await userAdminPath.get()).data();
+ 
   const token = await adminAuth.createCustomToken(
     credential.user.uid, { admin: userAdminData?.admin }
   );
+  await userAdminPath.update({ token });
+
+  delete userAdminData?.token;
 
   res.json({
     token,
-    user: userAdminData
+    user: {
+      ...userAdminData,
+    }
   });
 });
 
+
+export const logout = ctrlWrapper(async (req: Request, res: Response) => {
+  const { auth } = req.body;
+ 
+  await admin.firestore().doc(`users/${auth.uid}`).update({ token: '' })
+
+  res.json({ message: 'Logout success' })
+})
+
 export const current = ctrlWrapper(async (req: Request, res: Response) => {
   const { admin } = req.body;
+  delete admin?.token;
 
   res.json({
     user: admin,
