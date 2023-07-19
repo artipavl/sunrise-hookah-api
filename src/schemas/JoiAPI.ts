@@ -70,20 +70,24 @@ class JoiAPI {
   public addTovar = Joi.object({
     name: Joi.object({
       ua: Joi.string().min(2).max(50).required().messages({
-        "any.required": "Missing required 'name' field",
+        "any.required": "Missing required 'name ua' field",
         "string.min":
           "The length of 'name' must be between 2 and 35 characters",
         "string.max":
           "The length of 'name' must be between 2 and 35 characters",
       }),
       eu: Joi.string().min(2).max(50).required().messages({
-        "any.required": "Missing required 'name' field",
+        "any.required": "Missing required 'name eu' field",
         "string.min":
           "The length of 'name' must be between 2 and 35 characters",
         "string.max":
           "The length of 'name' must be between 2 and 35 characters",
       }),
-    }),
+    })
+      .required()
+      .messages({
+        "any.required": "Missing required 'name' field",
+      }),
     // переосмислити
     cost: Joi.number().required().messages({
       "any.required": "Missing required 'cost' field",
@@ -91,28 +95,40 @@ class JoiAPI {
 
     description: Joi.object({
       ua: Joi.string().required().messages({
-        "any.required": "Missing required 'description' field",
+        "any.required": "Missing required 'description ua' field",
       }),
       eu: Joi.string().required().messages({
+        "any.required": "Missing required 'description eu' field",
+      }),
+    })
+      .required()
+      .messages({
         "any.required": "Missing required 'description' field",
       }),
-    }),
     parameters: Joi.object({
       ua: Joi.string().required().messages({
-        "any.required": "Missing required 'parameters' field",
+        "any.required": "Missing required 'parameters ua' field",
       }),
       eu: Joi.string().required().messages({
+        "any.required": "Missing required 'parameters eu' field",
+      }),
+    })
+      .required()
+      .messages({
         "any.required": "Missing required 'parameters' field",
       }),
-    }),
     completeSet: Joi.object({
       ua: Joi.string().required().messages({
-        "any.required": "Missing required 'complete set' field",
+        "any.required": "Missing required 'complete set ua' field",
       }),
       eu: Joi.string().required().messages({
-        "any.required": "Missing required 'complete set' field",
+        "any.required": "Missing required 'complete set eu' field",
       }),
-    }),
+    })
+      .required()
+      .messages({
+        "any.required": "Missing required 'completeSet' field",
+      }),
     quantity: Joi.number().required().messages({
       "any.required": "Missing required 'quantity set' field",
     }),
@@ -120,6 +136,65 @@ class JoiAPI {
       "any.required": "Missing required 'popularity set' field",
     }),
     type: Joi.string().min(2).max(50).required().messages({
+      "any.required": "Missing required 'type' field",
+      "string.min": "The length of 'type' must be between 2 and 35 characters",
+      "string.max": "The length of 'type' must be between 2 and 35 characters",
+    }),
+    fotos: Joi.array().items(Joi.string()).default([]),
+  });
+
+  public updateTovar = Joi.object({
+    name: Joi.object({
+      ua: Joi.string().min(2).max(50).required().messages({
+        "any.required": "Missing required 'name ua' field",
+        "string.min":
+          "The length of 'name' must be between 2 and 35 characters",
+        "string.max":
+          "The length of 'name' must be between 2 and 35 characters",
+      }),
+      eu: Joi.string().min(2).max(50).required().messages({
+        "any.required": "Missing required 'name eu' field",
+        "string.min":
+          "The length of 'name' must be between 2 and 35 characters",
+        "string.max":
+          "The length of 'name' must be between 2 and 35 characters",
+      }),
+    }),
+    cost: Joi.number().messages({
+      "any.required": "Missing required 'cost' field",
+    }),
+
+    description: Joi.object({
+      ua: Joi.string().required().messages({
+        "any.required": "Missing required 'description ua' field",
+      }),
+      eu: Joi.string().required().messages({
+        "any.required": "Missing required 'description eu' field",
+      }),
+    }),
+    parameters: Joi.object({
+      ua: Joi.string().required().messages({
+        "any.required": "Missing required 'parameters ua' field",
+      }),
+      eu: Joi.string().required().messages({
+        "any.required": "Missing required 'parameters eu' field",
+      }),
+    }),
+    completeSet: Joi.object({
+      ua: Joi.string().required().messages({
+        "any.required": "Missing required 'complete set ua' field",
+      }),
+      eu: Joi.string().required().messages({
+        "any.required": "Missing required 'complete set eu' field",
+      }),
+    }),
+    quantity: Joi.number().messages({
+      "any.required": "Missing required 'quantity set' field",
+    }),
+    popularity: Joi.number().messages({
+      "any.required": "Missing required 'popularity set' field",
+    }),
+    type: Joi.string().min(2).max(50).messages({
       "any.required": "Missing required 'type' field",
       "string.min": "The length of 'type' must be between 2 and 35 characters",
       "string.max": "The length of 'type' must be between 2 and 35 characters",

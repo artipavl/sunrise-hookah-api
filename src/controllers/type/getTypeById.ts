@@ -9,6 +9,7 @@ export const getTypeById = ctrlWrapper(async (req: Request, res: Response) => {
 
   if (!Type.data()) {
     res.status(400).json("Bad Request");
+    return;
   }
 
   res.json({ ...Type.data() });

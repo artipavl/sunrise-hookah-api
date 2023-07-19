@@ -2,16 +2,14 @@ import { Request, Response } from "express";
 import admin from "firebase-admin";
 import { ctrlWrapper } from "../../helpers";
 
-export const removeType = ctrlWrapper(async (req: Request, res: Response) => {
+export const removeTovar = ctrlWrapper(async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const Type = await admin.firestore().collection("types").doc(id).delete();
+  const tovar = await admin.firestore().collection("types").doc(id).delete();
 
-  if (!Type) {
+  if (!tovar) {
     res.status(400).json("Bad Request");
-    return;
   }
-  console.log(Type);
 
   res.json("OK");
 });
