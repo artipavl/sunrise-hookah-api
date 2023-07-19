@@ -15,6 +15,7 @@ export const updateType = ctrlWrapper(async (req: Request, res: Response) => {
 
   if (!Type.data()) {
     res.status(400).json("Bad Request");
+    return;
   }
 
   await admin.firestore().collection("types").doc(id).set({ ua, eu });

@@ -14,8 +14,8 @@ export const addTovar = ctrlWrapper(async (req: Request, res: Response) => {
   const bucket = admin.storage().bucket();
 
   const fotos: string[] = [];
-    const storage = getStorage();
-    
+  const storage = getStorage();
+
   if (files && files instanceof Array) {
     for (let index = 0; index < files.length; index++) {
       await uploadImageToStorage(
@@ -28,13 +28,15 @@ export const addTovar = ctrlWrapper(async (req: Request, res: Response) => {
           ref(storage, `tovars/${newTovar.id}/${files[index].originalname}`)
         )
       );
-      await unlinkSync(files[index].path);
+      unlinkSync(files[index].path);
     }
   }
 
-  const cityRef = await admin.firestore().collection("tovars").doc(newTovar.id);
+  await admin
+    .firestore()
+    .collection("tovars")
+    .doc(newTovar.id)
+    .update({ fotos });
 
-  await cityRef.update({ fotos });
-
-  res.status(201).json({ ...tovar, fotos });
+  res.status(201).json({ ...tovar, fotos, id: newTovar.id });
 });
