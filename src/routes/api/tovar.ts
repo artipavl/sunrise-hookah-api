@@ -5,6 +5,7 @@ import {
   getTovarByType,
   getTovarByid,
   removeTovar,
+  updateTovarById,
 } from "../../controllers/tovar";
 import { upload } from "../../helpers";
 import {
@@ -20,13 +21,21 @@ router.get("/type/:id", getTovarByType);
 router.get("/:id", getTovarByid);
 router.delete("/:id", Authorization, removeTovar);
 
-// router.use(bodyParser.urlencoded({ extended: true }));
 router.post(
   "/",
+  Authorization,
   upload.array("files", 5),
   convertJsonBodyTovar,
   isValidBody(joiAPI.addTovar),
   addTovar
+);
+router.put(
+  "/:id",
+  Authorization,
+  upload.array("files", 5),
+  convertJsonBodyTovar,
+  isValidBody(joiAPI.addTovar),
+  updateTovarById
 );
 
 export default router;
