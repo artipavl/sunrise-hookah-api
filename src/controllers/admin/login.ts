@@ -1,21 +1,13 @@
-import { Request, Response } from "express";
 import admin from "firebase-admin";
+import { Request, Response } from "express";
 import { ctrlWrapper } from "../../helpers";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, } from 'firebase/auth';
+import { AdminUser } from "../../Types";
 
 const getAdminAuth = admin.auth;
 
-interface RequestBody {
-  email: string;
-  password: string;
-  name: string;
-}
-
 export const login = ctrlWrapper(async (req: Request, res: Response) => {
-    const { email, password }: RequestBody = req.body;
+    const { email, password }: AdminUser = req.body;
 
     const auth = getAuth();
     const adminAuth = getAdminAuth();

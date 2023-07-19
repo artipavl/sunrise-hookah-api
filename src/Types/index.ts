@@ -1,3 +1,4 @@
 import TovarType from "./tovar";
+import AdminUser from "./admin";
 
-export { TovarType };
+export { TovarType, AdminUser };
