@@ -11,8 +11,8 @@ import { joiAPI } from "../../schemas/JoiAPI";
 
 const router = express.Router();
 
-router.get("/tovar/:id", getTovarByid);
-router.get("/:id", getTovarByType);
+router.get("/type/:id", getTovarByType);
+router.get("/:id", getTovarByid);
 
 // router.use(bodyParser.urlencoded({ extended: true }));
 router.post(
