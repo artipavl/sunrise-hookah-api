@@ -9,11 +9,12 @@ export const getAllType = ctrlWrapper(async (_req: Request, res: Response) => {
 
   if (Type.empty) {
     res.json({ types });
-  } else {
-    Type.forEach((doc) => {
-      types.push({ ...doc.data(), id: doc.id });
-    });
-
-    res.json(types);
+    return;
   }
+  
+  Type.forEach((doc) => {
+    types.push({ ...doc.data(), id: doc.id });
+  });
+
+  res.json(types);
 });

@@ -9,6 +9,7 @@ export const removeType = ctrlWrapper(async (req: Request, res: Response) => {
 
   if (!Type) {
     res.status(400).json("Bad Request");
+    return;
   }
   console.log(Type);
 
