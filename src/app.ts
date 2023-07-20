@@ -18,11 +18,11 @@ app.use("/", adminRouter);
 app.use("/type", typeRouter);
 app.use("/tovar", tovarRouter);
 
-type ErrorType = Error & { status: number };
+// type ErrorType = Error & { status: number };
 
-app.use((err: ErrorType, _req: Request, res: Response) => {
-  const { message = "Internal Server Error", status = 500 } = err;
-  res.status(status).json({ message });
+app.use((err: Error, _req: Request, res: Response) => {
+  const { message = "Internal Server Error" } = err;
+  res.status(500).json({ message }).end();
 });
 
 export default app;
