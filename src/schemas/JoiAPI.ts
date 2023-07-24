@@ -201,6 +201,37 @@ class JoiAPI {
     }),
     fotos: Joi.array().items(Joi.string()).default([]),
   });
+
+  public feedbackSchema = Joi.object({
+    firstName: Joi.string().min(2).max(50).required().messages({
+      "any.required": "Missing required 'type' field",
+      "string.min": "The length of 'type' must be between 2 and 35 characters",
+      "string.max": "The length of 'type' must be between 2 and 35 characters",
+    }),
+    lastName: Joi.string().min(2).max(50).required().messages({
+      "any.required": "Missing required 'type' field",
+      "string.min": "The length of 'type' must be between 2 and 35 characters",
+      "string.max": "The length of 'type' must be between 2 and 35 characters",
+    }),
+    phone: Joi.string()
+      .pattern(
+        /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
+        "Invalid phone number"
+      )
+      .required()
+      .messages({
+        "any.required": "Missing required 'type' field",
+        "any.pattern": "not pattern",
+      }),
+    email: Joi.string().email().required().messages({
+      "any.required": "Missing required 'type' field",
+      "any.pattern": "not pattern",
+    }),
+    message: Joi.string().min(2).required().messages({
+      "any.required": "Missing required 'type' field",
+      "string.min": "The length of 'type' must be minimum 2 characters",
+    }),
+  });
 }
 
 const joiAPI = new JoiAPI();

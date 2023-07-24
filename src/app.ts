@@ -4,7 +4,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
-import { adminRouter, typeRouter, tovarRouter } from "./routes/api";
+import {
+  adminRouter,
+  typeRouter,
+  tovarRouter,
+  feedbackRouter,
+} from "./routes/api";
 
 const app = express();
 
@@ -17,6 +22,7 @@ app.use(express.json());
 app.use("/", adminRouter);
 app.use("/type", typeRouter);
 app.use("/tovar", tovarRouter);
+app.use("/feedback", feedbackRouter);
 
 // type ErrorType = Error & { status: number };
 
