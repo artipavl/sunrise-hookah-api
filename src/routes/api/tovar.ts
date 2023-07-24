@@ -2,6 +2,7 @@ import express from "express";
 
 import {
   addTovar,
+  getPopulate,
   getTovarByType,
   getTovarByid,
   removeTovar,
@@ -18,6 +19,7 @@ import { joiAPI } from "../../schemas/JoiAPI";
 const router = express.Router();
 
 router.get("/type/:id", getTovarByType);
+router.get("/populate", getPopulate);
 router.get("/:id", getTovarByid);
 router.delete("/:id", Authorization, removeTovar);
 
