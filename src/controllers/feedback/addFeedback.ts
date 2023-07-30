@@ -5,8 +5,10 @@ import { Feedback } from "../../Types";
 
 export const addFeedback = ctrlWrapper(async (req: Request, res: Response) => {
   const feedback: Feedback = req.body;
-
-  await admin.firestore().collection("feedbacks").add(feedback);
+  await admin
+    .firestore()
+    .collection("feedbacks")
+    .add({ ...feedback, date: new Date().getTime() });
 
   res.status(201).json("OK");
 });
