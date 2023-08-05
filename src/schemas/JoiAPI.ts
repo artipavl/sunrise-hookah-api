@@ -232,6 +232,20 @@ class JoiAPI {
       "string.min": "The length of 'type' must be minimum 2 characters",
     }),
   });
+
+  public novapostaGetCity = Joi.object({
+    Page: Joi.number().min(1),
+    CityName: Joi.string().min(3).required(),
+    Limit: Joi.number().min(1),
+  });
+  public novapostagetWarehouses = Joi.object({
+    Page: Joi.number().min(1),
+    CityName: Joi.string().min(3).required(),
+    Limit: Joi.number().min(1),
+    CityRef: Joi.string().min(36).max(36),
+    TypeOfWarehouseRef: Joi.string().min(36).max(36),
+    WarehouseId: Joi.number().min(1),
+  });
 }
 
 const joiAPI = new JoiAPI();
