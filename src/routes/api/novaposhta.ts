@@ -6,13 +6,13 @@ import { isValidBody } from "../../helpers";
 
 const router = express.Router();
 
-router.get(
+router.post(
   "/searchSettlements",
   isValidBody(joiAPI.novapostaGetCity),
   searchSettlements
 );
 
-router.get(
+router.post(
   "/getWarehouses",
   isValidBody(joiAPI.novapostagetWarehouses),
   getWarehouses
