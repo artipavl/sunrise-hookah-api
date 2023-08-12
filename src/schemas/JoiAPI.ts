@@ -1,5 +1,7 @@
 import Joi from "joi";
 
+const status = ["new", "paid", "accepted", "done"];
+
 class JoiAPI {
   private emailRegexp: RegExp =
     /^([A-z0-9_-]+\.)*[A-z0-9_-]+@[A-z0-9_-]+(\.[A-z0-9_-]+)*\.[A-z]{2,6}$/;
@@ -245,6 +247,94 @@ class JoiAPI {
     CityRef: Joi.string().min(36).max(36),
     TypeOfWarehouseRef: Joi.string().min(36).max(36),
     WarehouseId: Joi.number().min(1),
+  });
+
+  public Week = Joi.object({
+    Monday: Joi.string(),
+    Tuesday: Joi.string(),
+    Wednesday: Joi.string(),
+    Thursday: Joi.string(),
+    Friday: Joi.string(),
+    Saturday: Joi.string(),
+    Sunday: Joi.string(),
+  });
+
+  public Limitations = Joi.object({
+    Width: Joi.number(),
+    Height: Joi.number(),
+    Length: Joi.number(),
+  });
+
+  public addOrder = Joi.object({
+    customer: this.feedbackSchema.required(),
+    orders: Joi.array()
+      .items(
+        Joi.object({
+          id: Joi.string().required(),
+          baskeQuantity: Joi.number().required(),
+        })
+      )
+      .required(),
+    delivery: Joi.object({
+      SiteKey: Joi.string(),
+      Description: Joi.string(),
+      DescriptionRu: Joi.string(),
+      ShortAddress: Joi.string(),
+      ShortAddressRu: Joi.string(),
+      Phone: Joi.string(),
+      TypeOfWarehouse: Joi.string(),
+      Ref: Joi.string(),
+      Number: Joi.string(),
+      CityRef: Joi.string(),
+      CityDescription: Joi.string(),
+      CityDescriptionRu: Joi.string(),
+      SettlementRef: Joi.string(),
+      SettlementDescription: Joi.string(),
+      SettlementAreaDescription: Joi.string(),
+      SettlementRegionsDescription: Joi.string(),
+      SettlementTypeDescription: Joi.string(),
+      SettlementTypeDescriptionRu: Joi.string(),
+      Longitude: Joi.string(),
+      Latitude: Joi.string(),
+      PostFinance: Joi.string(),
+      BicycleParking: Joi.string(),
+      PaymentAccess: Joi.string(),
+      POSTerminal: Joi.string(),
+      InternationalShipping: Joi.string(),
+      SelfServiceWorkplacesCount: Joi.string(),
+      TotalMaxWeightAllowed: Joi.string(),
+      PlaceMaxWeightAllowed: Joi.string(),
+      SendingLimitationsOnDimensions: this.Limitations,
+      ReceivingLimitationsOnDimensions: this.Limitations,
+      Reception: this.Week,
+      Delivery: this.Week,
+      Schedule: this.Week,
+      DistrictCode: Joi.string(),
+      WarehouseStatus: Joi.string(),
+      WarehouseStatusDate: Joi.string(),
+      WarehouseIllusha: Joi.string(),
+      CategoryOfWarehouse: Joi.string(),
+      Direct: Joi.string(),
+      RegionCity: Joi.string(),
+      WarehouseForAgent: Joi.string(),
+      GeneratorEnabled: Joi.string(),
+      MaxDeclaredCost: Joi.string(),
+      WorkInMobileAwis: Joi.string(),
+      DenyToSelect: Joi.string(),
+      CanGetMoneyTransfer: Joi.string(),
+      OnlyReceivingParcel: Joi.string(),
+      PostMachineType: Joi.string(),
+      PostalCodeUA: Joi.string(),
+      WarehouseIndex: Joi.string(),
+      BeaconCode: Joi.string(),
+    }).required(),
+  });
+
+  public Order = this.addOrder.append({
+    id: Joi.string().required().required(),
+    status: Joi.string()
+      .valid(...status)
+      .required(),
   });
 }
 
