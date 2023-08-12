@@ -10,6 +10,7 @@ import {
   tovarRouter,
   feedbackRouter,
   novaposhtaRouter,
+  orderRouter,
 } from "./routes/api";
 
 const app = express();
@@ -25,6 +26,7 @@ app.use("/type", typeRouter);
 app.use("/tovar", tovarRouter);
 app.use("/feedback", feedbackRouter);
 app.use("/novaposhta", novaposhtaRouter);
+app.use("/order", orderRouter);
 
 // type ErrorType = Error & { status: number };
 
