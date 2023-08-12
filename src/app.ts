@@ -1,4 +1,5 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import type { ErrorRequestHandler } from "express";
 import logger from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -28,11 +29,12 @@ app.use("/feedback", feedbackRouter);
 app.use("/novaposhta", novaposhtaRouter);
 app.use("/order", orderRouter);
 
-// type ErrorType = Error & { status: number };
 
-app.use((err: Error, _req: Request, res: Response) => {
-  const { message = "Internal Server Error" } = err;
-  res.status(500).json({ message }).end();
-});
+const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+  const { message = "Internal Server Error", status = "500" } = err;
+  res.status(status).json({ message }).end();
+};
+
+app.use(errorHandler);
 
 export default app;
