@@ -62,7 +62,7 @@ class JoiAPI {
       "string.min": "The length of 'type' must be between 2 and 35 characters",
       "string.max": "The length of 'type' must be between 2 and 35 characters",
     }),
-    eu: Joi.string().min(2).max(50).required().messages({
+    en: Joi.string().min(2).max(50).required().messages({
       "any.required": "Missing required 'type' field",
       "string.min": "The length of 'type' must be between 2 and 35 characters",
       "string.max": "The length of 'type' must be between 2 and 35 characters",
@@ -78,7 +78,7 @@ class JoiAPI {
         "string.max":
           "The length of 'name' must be between 2 and 35 characters",
       }),
-      eu: Joi.string().min(2).max(50).required().messages({
+      en: Joi.string().min(2).max(50).required().messages({
         "any.required": "Missing required 'name eu' field",
         "string.min":
           "The length of 'name' must be between 2 and 35 characters",
@@ -99,7 +99,7 @@ class JoiAPI {
       ua: Joi.string().required().messages({
         "any.required": "Missing required 'description ua' field",
       }),
-      eu: Joi.string().required().messages({
+      en: Joi.string().required().messages({
         "any.required": "Missing required 'description eu' field",
       }),
     })
@@ -111,7 +111,7 @@ class JoiAPI {
       ua: Joi.string().required().messages({
         "any.required": "Missing required 'parameters ua' field",
       }),
-      eu: Joi.string().required().messages({
+      en: Joi.string().required().messages({
         "any.required": "Missing required 'parameters eu' field",
       }),
     })
@@ -123,7 +123,7 @@ class JoiAPI {
       ua: Joi.string().required().messages({
         "any.required": "Missing required 'complete set ua' field",
       }),
-      eu: Joi.string().required().messages({
+      en: Joi.string().required().messages({
         "any.required": "Missing required 'complete set eu' field",
       }),
     })
@@ -154,7 +154,7 @@ class JoiAPI {
         "string.max":
           "The length of 'name' must be between 2 and 35 characters",
       }),
-      eu: Joi.string().min(2).max(50).required().messages({
+      en: Joi.string().min(2).max(50).required().messages({
         "any.required": "Missing required 'name eu' field",
         "string.min":
           "The length of 'name' must be between 2 and 35 characters",
@@ -170,7 +170,7 @@ class JoiAPI {
       ua: Joi.string().required().messages({
         "any.required": "Missing required 'description ua' field",
       }),
-      eu: Joi.string().required().messages({
+      en: Joi.string().required().messages({
         "any.required": "Missing required 'description eu' field",
       }),
     }),
@@ -178,7 +178,7 @@ class JoiAPI {
       ua: Joi.string().required().messages({
         "any.required": "Missing required 'parameters ua' field",
       }),
-      eu: Joi.string().required().messages({
+      en: Joi.string().required().messages({
         "any.required": "Missing required 'parameters eu' field",
       }),
     }),
@@ -186,7 +186,7 @@ class JoiAPI {
       ua: Joi.string().required().messages({
         "any.required": "Missing required 'complete set ua' field",
       }),
-      eu: Joi.string().required().messages({
+      en: Joi.string().required().messages({
         "any.required": "Missing required 'complete set eu' field",
       }),
     }),

@@ -1,6 +1,6 @@
 interface TwoLeng {
   ua: string;
-  eu: string;
+  en: string;
 }
 
 type Tovar = {
