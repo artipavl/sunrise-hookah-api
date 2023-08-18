@@ -5,13 +5,14 @@ import { ctrlWrapper } from "../../helpers";
 export const removeType = ctrlWrapper(async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const Type = await admin.firestore().collection("types").doc(id).delete();
+  const Type = admin.firestore().collection("types").doc(id);
+  const getType = (await Type.get()).data();
 
-  if (!Type) {
+  if (!getType) {
     res.status(400).json("Bad Request");
-    return;
   }
-  console.log(Type);
+
+  await Type.delete();
 
   res.json("OK");
 });

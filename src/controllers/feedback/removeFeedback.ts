@@ -2,18 +2,19 @@ import { Request, Response } from "express";
 import admin from "firebase-admin";
 import { ctrlWrapper } from "../../helpers";
 
-export const removeFeedback = ctrlWrapper(async (req: Request, res: Response) => {
-  const { id } = req.params;
+export const removeFeedback = ctrlWrapper(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
 
-  const tovar = await admin
-    .firestore()
-    .collection("feedbacks")
-    .doc(id)
-    .delete();
+    const feedback = admin.firestore().collection("feedbacks").doc(id);
+    const getFeedback = (await feedback.get()).data();
 
-  if (!tovar) {
-    res.status(400).json("Bad Request");
+    if (!getFeedback) {
+      res.status(400).json("Bad Request");
+    }
+
+    await feedback.delete();
+
+    res.json("OK");
   }
-
-  res.json("OK");
-});
+);
