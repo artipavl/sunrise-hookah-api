@@ -1,7 +1,7 @@
 interface AdminUser {
-    email: string;
-    password: string;
-    name: string;
+  email: string;
+  password: string;
+  name: string;
 }
 
 export default AdminUser;
