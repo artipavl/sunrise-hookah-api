@@ -24,5 +24,5 @@ export const registers = ctrlWrapper(async (req: Request, res: Response) => {
     .doc(`users/${credential.user.uid}`)
     .set({ email, name, admin: "admin" });
 
-  res.status(201).json("cool");
+  res.status(201).json({ id: credential.user.uid,  email, name, admin: "admin" });
 });
