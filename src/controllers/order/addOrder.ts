@@ -21,11 +21,11 @@ export const addOrder = ctrlWrapper(async (req: Request, res: Response) => {
       res.status(500).json("Bad Request");
     }
   }
-
+  const date = new Date().getTime();
   const newOrder = await admin
     .firestore()
     .collection("orders")
-    .add({ ...order, status: "new" });
+    .add({ ...order, status: "new", date });
 
-  res.status(201).json({ ...order, id: newOrder.id, status: "new" });
+  res.status(201).json({ ...order, id: newOrder.id, status: "new", date });
 });
