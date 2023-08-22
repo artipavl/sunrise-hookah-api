@@ -12,7 +12,7 @@ export const addOrder = ctrlWrapper(async (req: Request, res: Response) => {
     try {
       await admin
         .firestore()
-        .collection("orders")
+        .collection("tovars")
         .doc(item.id)
         .update({
           population: FieldValue.increment(item.baskeQuantity),
