@@ -4,6 +4,7 @@ import { addTovar } from "./addTovar";
 import { removeTovar } from "./removeTovar";
 import { updateTovarById } from "./updateTovarById";
 import { getPopulate } from "./getPopulate";
+import { getAllTovars } from "./getAllTovars";
 
 export {
   getTovarByType,
@@ -12,4 +13,5 @@ export {
   removeTovar,
   updateTovarById,
   getPopulate,
+  getAllTovars,
 };
