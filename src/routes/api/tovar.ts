@@ -2,6 +2,7 @@ import express from "express";
 
 import {
   addTovar,
+  getAllTovars,
   getPopulate,
   getTovarByType,
   getTovarByid,
@@ -21,6 +22,7 @@ const router = express.Router();
 router.get("/type/:id", getTovarByType);
 router.get("/populate", getPopulate);
 router.get("/:id", getTovarByid);
+router.get('/', Authorization, getAllTovars);
 router.delete("/:id", Authorization, removeTovar);
 
 router.post(
