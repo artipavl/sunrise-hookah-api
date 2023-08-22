@@ -276,16 +276,16 @@ class JoiAPI {
       )
       .required(),
     delivery: Joi.object({
-      SiteKey: Joi.string(),
-      Description: Joi.string(),
+      SiteKey: Joi.string().required(),
+      Description: Joi.string().required(),
+      Ref: Joi.string().required(),
+      CityRef: Joi.string().required(),
       DescriptionRu: Joi.string(),
       ShortAddress: Joi.string(),
       ShortAddressRu: Joi.string(),
       Phone: Joi.string(),
       TypeOfWarehouse: Joi.string(),
-      Ref: Joi.string(),
       Number: Joi.string(),
-      CityRef: Joi.string(),
       CityDescription: Joi.string(),
       CityDescriptionRu: Joi.string(),
       SettlementRef: Joi.string(),
@@ -327,7 +327,7 @@ class JoiAPI {
       PostalCodeUA: Joi.string(),
       WarehouseIndex: Joi.string(),
       BeaconCode: Joi.string(),
-    }).required(),
+    }),
   });
 
   public Order = this.addOrder.append({
