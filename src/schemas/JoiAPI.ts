@@ -266,6 +266,7 @@ class JoiAPI {
   });
 
   public addOrder = Joi.object({
+    payment: Joi.number().min(1).max(2).required(),
     customer: this.feedbackSchema.required(),
     orders: Joi.array()
       .items(

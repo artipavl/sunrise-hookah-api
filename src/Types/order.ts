@@ -77,6 +77,7 @@ export type AddOrder = {
   customer: Feedback;
   orders: Tovar[];
   delivery: Warehous;
+  payment: number;
 };
 
 export type Order = AddOrder & {
