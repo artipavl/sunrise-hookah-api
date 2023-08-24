@@ -6,8 +6,8 @@ import { FieldValue } from "firebase-admin/firestore";
 import { OrderType } from "../../Types";
 
 export const addOrder = ctrlWrapper(async (req: Request, res: Response) => {
-  const order: OrderType.AddOrder = req.body;
-
+  const { customer, orders, delivery, payment } = req.body;
+  const order: OrderType.AddOrder = { customer, orders, delivery, payment };
   for (const item of order.orders) {
     try {
       await admin
