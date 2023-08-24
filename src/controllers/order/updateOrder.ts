@@ -4,9 +4,17 @@ import admin from "firebase-admin";
 import { OrderType } from "Types";
 
 export const updateOrder = ctrlWrapper(async (req: Request, res: Response) => {
-  const order: OrderType.Order = req.body;
+  const { customer, orders, delivery, payment, status, date, id } = req.body;
+  const order: OrderType.Order = {
+    customer,
+    orders,
+    delivery,
+    payment,
+    status,
+    date,
+  };
 
-  const get = await admin.firestore().collection("orders").doc(order.id).get();
+  const get = await admin.firestore().collection("orders").doc(id).get();
 
   if (!get.data()) {
     res.status(400).json("Bad Request");
@@ -16,7 +24,7 @@ export const updateOrder = ctrlWrapper(async (req: Request, res: Response) => {
   await admin
     .firestore()
     .collection("orders")
-    .doc(order.id)
+    .doc(id)
     .update({ ...order });
 
   res.status(201).json({ ...order });

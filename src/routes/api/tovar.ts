@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/type/:id", getTovarByType);
 router.get("/populate", getPopulate);
 router.get("/:id", getTovarByid);
-router.get('/', Authorization, getAllTovars);
+router.get("/", Authorization, getAllTovars);
 router.delete("/:id", Authorization, removeTovar);
 
 router.post(
@@ -36,7 +36,7 @@ router.post(
 
 router.put(
   "/:id",
-  // Authorization,
+  Authorization,
   upload.array("files", 5),
   convertJsonBodyTovar,
   isValidBody(joiAPI.updateTovar),
