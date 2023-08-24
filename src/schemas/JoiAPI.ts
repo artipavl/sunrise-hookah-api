@@ -336,6 +336,7 @@ class JoiAPI {
     status: Joi.string()
       .valid(...status)
       .required(),
+    date: Joi.number().required(),
   });
 }
 
