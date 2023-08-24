@@ -27,5 +27,5 @@ export const updateOrder = ctrlWrapper(async (req: Request, res: Response) => {
     .doc(id)
     .update({ ...order });
 
-  res.status(201).json({ ...order });
+  res.status(201).json({ ...order, id });
 });
