@@ -3,21 +3,21 @@ import admin from "firebase-admin";
 import { ctrlWrapper } from "../../helpers";
 
 interface RequestBody {
-  ua: string;
-  eu: string;
+  ukr: string;
+  en: string;
 }
 
 export const addType = ctrlWrapper(async (req: Request, res: Response) => {
-  const { ua, eu }: RequestBody = req.body;
+  const { ukr, en }: RequestBody = req.body;
 
   const Type = await admin.firestore().collection("types").add({
-    ua,
-    eu,
+    ukr,
+    en,
   });
 
   res.json({
     id: Type.id,
-    ua,
-    eu,
+    ukr,
+    en,
   });
 });

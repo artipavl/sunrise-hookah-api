@@ -1,18 +1,17 @@
-interface TwoLeng {
-  ua: string;
-  en: string;
-}
-
 type Tovar = {
-  name: TwoLeng;
-  cost: number;
-  description: TwoLeng;
-  parameters: TwoLeng;
-  completeSet: TwoLeng;
-  quantity: number;
-  popularity: number;
-  type: string;
-  fotos?: string[];
+	nameUKR: string;
+	nameEN: string;
+	cost: number;
+	descriptionUKR: string;
+	descriptionEN: string;
+	parametersUKR: string;
+	parametersEN: string;
+	completeSetUKR: string;
+	completeSetEN: string;
+	quantity: number;
+	popularity: number;
+	type: string;
+	fotos?: string[];
 };
 
 export default Tovar;
