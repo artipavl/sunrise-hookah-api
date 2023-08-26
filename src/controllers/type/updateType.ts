@@ -3,12 +3,12 @@ import admin from "firebase-admin";
 import { ctrlWrapper } from "../../helpers";
 
 interface RequestBody {
-  ua: string;
-  eu: string;
+  ukr: string;
+  en: string;
 }
 
 export const updateType = ctrlWrapper(async (req: Request, res: Response) => {
-  const { ua, eu }: RequestBody = req.body;
+  const { ukr, en }: RequestBody = req.body;
   const { id } = req.params;
 
   const Type = await admin.firestore().collection("types").doc(id).get();
@@ -18,11 +18,11 @@ export const updateType = ctrlWrapper(async (req: Request, res: Response) => {
     return;
   }
 
-  await admin.firestore().collection("types").doc(id).set({ ua, eu });
+  await admin.firestore().collection("types").doc(id).set({ ukr, en });
 
   res.json({
     id: Type.id,
-    ua,
-    eu,
+    ukr,
+    en,
   });
 });
