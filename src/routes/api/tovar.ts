@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/type/:id", getTovarByType);
 router.get("/populate", getPopulate);
 router.get("/:id", getTovarByid);
-router.get("/", Authorization, getAllTovars);
+router.get("/", getAllTovars);
 router.delete("/:id", Authorization, removeTovar);
 
 router.post(
